@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package shortlink;
+option go_package = "./shortlink";
+
+message ShortLinkCreateRequest {
+  string origin_url = 2;       // 原始链接
+  string gid = 3;              // 分组标识
+  string describe = 6;         // 描述
+}
+
+message ShortLinkCreateResponse {
+  bool success = 1;
+  string origin_url = 3;       // 原始链接
+}
+
+message ShortLinkUpdateResponse {
+  bool success = 1;
+}
+
+message ShortLinkUpdateRequest {
+  string gid = 1;              // 分组标识
+  string origin_url = 2;       // 原始链接
+  string short_uri = 3;        // 短链接
+  string describe = 4;         // 描述
+  string favicon = 5;          // 网站图标
+  int64 clickNum = 6;          // 点击次数
+  int64 totalPv = 7;           // 总PV（Page Views）
+  int64 totalUv = 8;           // 总UV（Unique Visitors）
+  int64 totalUip = 9;          // 总独立IP
+  int64 todayPv = 10;          // 今日PV
+  int64 todayUv = 11;          // 今日UV
+  int64 todayUip = 12;         // 今日独立IP
+}
+
+
+message ShortLinkBatchCreateRequest {
+  repeated string origin_urls = 1;  // 原始链接集合
+  repeated string describes = 2;    // 描述集合
+  string gid = 3;                   // 分组标识
+}
+
+message ShortLinkPageRequest {
+  string gid = 1;
+  int64 page = 2;
+  int64 size = 3;
+  int64 orderTag = 4;
+}
+
+message ShortLinkPageResponse {
+  repeated ShortLinkPageData list = 1; // 短链接分页数据列表
+  int64 page = 2;
+  int64 maxPage = 3;
+  int64 total = 4;                     // 总条数
+}
+
+message ShortLinkPageData{
+  string short_uri = 3;        // 短链接
+  string full_short_url = 4;   // 完整短链接
+  string origin_url = 5;       // 原始链接
+  string gid = 6;              // 分组标识
+  int32 enable_status = 8;     // 启用标识 0：启用 1：未启用
+  int64 create_time = 10;      // 创建时间（时间戳格式，单位：秒）
+  string describe = 11;        // 描述
+  string favicon = 12;         // 网站标识
+  int32 total_pv = 13;         // 历史PV
+  int32 today_pv = 14;         // 今日PV
+  int32 total_uv = 15;         // 历史UV
+  int32 today_uv = 16;         // 今日UV
+  int32 total_uip = 17;        // 历史UIP
+  int32 today_uip = 18;        // 今日UIP
+}
+
+message ListGroupShortLinkCountRequest{
+  string gid = 1;
+}
+
+message ListGroupShortLinkCountResponse{
+  string gid = 1;
+  int32 shortlinkCount = 2;
+}
+
+message ShortLinkDeleteRequest{
+  string shortUri = 1;
+  string origin_url = 2;
+}
+
+message ShortLinkDeleteResponse{
+  bool success = 1;
+}
+
+service Shortlink {
+  rpc CreateShortLink(ShortLinkCreateRequest) returns(ShortLinkCreateResponse);
+  rpc UpdateShortLink(ShortLinkUpdateRequest) returns(ShortLinkUpdateResponse);
+  rpc PageShortLink(ShortLinkPageRequest) returns(ShortLinkPageResponse);
+  rpc DeleteShortLink(ShortLinkDeleteRequest) returns(ShortLinkDeleteResponse);
+}

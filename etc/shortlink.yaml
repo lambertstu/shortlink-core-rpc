@@ -1,0 +1,11 @@
+Name: shortlink.rpc
+ListenOn: 0.0.0.0:8081
+Etcd:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: shortlink.rpc
+
+# redis
+Key: user.redis
+Host: 127.0.0.1:6379
+MongoUrl: mongodb://127.0.0.1:27019
