@@ -52,14 +52,16 @@ func (l *CreateShortLinkLogic) CreateShortLink(in *shortlink.ShortLinkCreateRequ
 			return nil, bloomErr
 		}
 
-		// TODO 日志
+		l.Logger.Error(err)
 		return &shortlink.ShortLinkCreateResponse{
+			ShortUri:  shortLinkSuffix,
 			OriginUrl: in.OriginUrl,
 			Success:   false,
 		}, nil
 	}
 
 	return &shortlink.ShortLinkCreateResponse{
+		ShortUri:  shortLinkSuffix,
 		OriginUrl: in.OriginUrl,
 		Success:   true,
 	}, nil
