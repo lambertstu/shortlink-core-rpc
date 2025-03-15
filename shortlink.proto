@@ -11,6 +11,7 @@ message ShortLinkCreateRequest {
 
 message ShortLinkCreateResponse {
   bool success = 1;
+  string short_uri = 2;
   string origin_url = 3;       // 原始链接
 }
 
@@ -69,6 +70,7 @@ message ShortLinkPageData{
   int32 today_uv = 16;         // 今日UV
   int32 total_uip = 17;        // 历史UIP
   int32 today_uip = 18;        // 今日UIP
+  string ClickNum = 19;        // 点击数
 }
 
 message ListGroupShortLinkCountRequest{

@@ -5,6 +5,7 @@ import (
 	model "github.com/lambertstu/shortlink-core-rpc/mongo/shortlink"
 	"github.com/lambertstu/shortlink-core-rpc/pkg/constant"
 	"go.mongodb.org/mongo-driver/bson"
+	"strconv"
 
 	"github.com/lambertstu/shortlink-core-rpc/internal/svc"
 	"github.com/lambertstu/shortlink-core-rpc/pb/shortlink"
@@ -46,6 +47,7 @@ func (l *PageShortLinkLogic) PageShortLink(in *shortlink.ShortLinkPageRequest) (
 			Gid:          item.Gid,
 			Describe:     item.Describe,
 			Favicon:      item.Favicon,
+			ClickNum:     strconv.Itoa(item.ClickNum),
 			TotalPv:      int32(item.TotalPv),
 			TodayPv:      int32(item.TodayPv),
 			TotalUv:      int32(item.TotalUv),
