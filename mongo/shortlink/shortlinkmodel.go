@@ -80,18 +80,41 @@ func (c *customShortlinkModel) UpdateShortLinkInfo(ctx context.Context, data *Sh
 	}
 
 	updateFields := bson.M{}
-	dataBytes, _ := bson.Marshal(data)
-	err := bson.Unmarshal(dataBytes, &updateFields)
-	if err != nil {
-		return err
+
+	// 动态添加需要更新的字段
+	if data.Describe != "" {
+		updateFields["describe"] = data.Describe
+	}
+	if data.Favicon != "" {
+		updateFields["favicon"] = data.Favicon
+	}
+	if data.ClickNum != 0 {
+		updateFields["click_num"] = data.ClickNum
+	}
+	if data.TotalPv != 0 {
+		updateFields["total_pv"] = data.TotalPv
+	}
+	if data.TotalUv != 0 {
+		updateFields["total_uv"] = data.TotalUv
+	}
+	if data.TotalUip != 0 {
+		updateFields["total_uip"] = data.TotalUip
+	}
+	if data.TodayPv != 0 {
+		updateFields["today_pv"] = data.TodayPv
+	}
+	if data.TodayUv != 0 {
+		updateFields["today_uv"] = data.TodayUv
+	}
+	if data.TodayUip != 0 {
+		updateFields["today_uip"] = data.TodayUip
+	}
+	if data.DeleteFlag != 0 {
+		updateFields["deleteFlag"] = data.DeleteFlag
 	}
 
-	delete(updateFields, "origin_url")
-	delete(updateFields, "full_short_url")
-	delete(updateFields, "short_uri")
-
 	if len(updateFields) == 0 {
-		return nil
+		return nil // 没有字段需要更新
 	}
 
 	update := bson.M{"$set": updateFields}

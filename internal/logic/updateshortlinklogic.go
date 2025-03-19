@@ -46,7 +46,7 @@ func (l *UpdateShortLinkLogic) UpdateShortLink(in *shortlink.ShortLinkUpdateRequ
 	if err != nil {
 		return &shortlink.ShortLinkUpdateResponse{
 			Success: false,
-		}, err
+		}, nil
 	}
 
 	return &shortlink.ShortLinkUpdateResponse{
