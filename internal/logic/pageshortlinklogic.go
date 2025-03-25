@@ -2,10 +2,11 @@ package logic
 
 import (
 	"context"
+	"strconv"
+
 	model "github.com/lambertstu/shortlink-core-rpc/mongo/shortlink"
 	"github.com/lambertstu/shortlink-core-rpc/pkg/constant"
 	"go.mongodb.org/mongo-driver/bson"
-	"strconv"
 
 	"github.com/lambertstu/shortlink-core-rpc/internal/svc"
 	"github.com/lambertstu/shortlink-core-rpc/pb/shortlink"
@@ -54,7 +55,8 @@ func (l *PageShortLinkLogic) PageShortLink(in *shortlink.ShortLinkPageRequest) (
 			TodayUv:      int32(item.TodayUv),
 			TotalUip:     int32(item.TotalUip),
 			TodayUip:     int32(item.TodayUip),
-			CreateTime:   item.CreateAt.Unix(),
+			CreateTime:   item.CreateAt.Format("2006-01-02 15:04:05"),
+			UpdateTime:   item.UpdateAt.Format("2006-01-02 15:04:05"),
 		})
 	}
 

@@ -55,23 +55,29 @@ message ShortLinkPageResponse {
   int64 total = 4;                     // 总条数
 }
 
-message ShortLinkPageData{
+message ShortLinkPageData {
   string short_uri = 3;        // 短链接
   string full_short_url = 4;   // 完整短链接
   string origin_url = 5;       // 原始链接
   string gid = 6;              // 分组标识
+
+  string create_time = 10;     // 创建时间，格式为 YYYY-MM-DDTHH:MM:SSZ
+  string update_time = 11;     // 更新时间，格式为 YYYY-MM-DDTHH:MM:SSZ
+
   int32 enable_status = 8;     // 启用标识 0：启用 1：未启用
-  int64 create_time = 10;      // 创建时间（时间戳格式，单位：秒）
-  string describe = 11;        // 描述
-  string favicon = 12;         // 网站标识
-  int32 total_pv = 13;         // 历史PV
-  int32 today_pv = 14;         // 今日PV
-  int32 total_uv = 15;         // 历史UV
-  int32 today_uv = 16;         // 今日UV
-  int32 total_uip = 17;        // 历史UIP
-  int32 today_uip = 18;        // 今日UIP
-  string ClickNum = 19;        // 点击数
+  string describe = 12;        // 描述
+  string favicon = 13;         // 网站标识
+
+  int32 total_pv = 14;         // 历史PV
+  int32 today_pv = 15;         // 今日PV
+  int32 total_uv = 16;         // 历史UV
+  int32 today_uv = 17;         // 今日UV
+  int32 total_uip = 18;        // 历史UIP
+  int32 today_uip = 19;        // 今日UIP
+
+  string ClickNum = 20;        // 点击数
 }
+
 
 message ListGroupShortLinkCountRequest{
   string gid = 1;
